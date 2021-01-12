@@ -1,0 +1,7 @@
+{
+  "name": "portal-deportivo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
