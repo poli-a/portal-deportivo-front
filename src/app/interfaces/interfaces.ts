@@ -11,3 +11,12 @@ export interface Noticia {
     usuario: number;
     categoria: number;
 }
+
+export interface Categoria {
+    id: number;
+    nombre: string;
+    slug: string;
+    created: string;
+    updated: string;
+    usuario: number;
+  }
