@@ -26,9 +26,16 @@ export class Tab2Page implements OnInit{
 
         // Estableciendo categoria p/ mostrar //
         const r = this.categorias.find(categoria => categoria.nombre === 'Futbol');
-        this.segment.value = r.nombre;      
+        this.segment.value = r.nombre;
+        this.noticiasPorCategorias(r.id);
       });
-            
+
   }
 
+  noticiasPorCategorias(categoria_id) {
+    this.noticiasService.getNoticiasPorCategorias(categoria_id)
+      .subscribe( resp => {
+        console.log(resp);
+      })
+  }
 }
