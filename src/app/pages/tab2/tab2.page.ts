@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NoticiasService } from '../../services/noticias.service';
-import { Categoria } from '../../interfaces/interfaces';
+import { Categoria, Noticia } from '../../interfaces/interfaces';
 import { IonSegment } from '@ionic/angular';
 
 @Component({
@@ -8,11 +8,13 @@ import { IonSegment } from '@ionic/angular';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
+
 export class Tab2Page implements OnInit{
 
   @ViewChild( IonSegment ) segment: IonSegment;
 
   categorias: Categoria[] = [];
+  noticias: Noticia[] = [];
 
   constructor( private noticiasService: NoticiasService ) {}
 
@@ -21,21 +23,26 @@ export class Tab2Page implements OnInit{
     // Obteniendo categorias del back //
     this.noticiasService.getCategorias()
       .subscribe( resp => {
-        console.log('Categorias', resp);
         this.categorias.push( ...resp );
 
         // Estableciendo categoria p/ mostrar //
-        const r = this.categorias.find(categoria => categoria.nombre === 'Futbol');
-        this.segment.value = r.nombre;
-        this.noticiasPorCategorias(r.id);
+        this.segment.value = 'Futbol';
+        this.noticiasPorCategorias('Futbol');
       });
 
   }
 
-  noticiasPorCategorias(categoria_id) {
-    this.noticiasService.getNoticiasPorCategorias(categoria_id)
+  noticiasPorCategorias(cat) {
+    this.noticias = [];
+
+    // Obteniendo id de categoria seleccionada //
+    const r = this.categorias.find(categoria => categoria.nombre === cat);
+
+    // Obteniendo noticias de categoria seleccionada //
+    this.noticiasService.getNoticiasPorCategorias(r.id)
       .subscribe( resp => {
-        console.log(resp);
-      })
+        this.noticias.push(...resp.results);
+      });
   }
+
 }

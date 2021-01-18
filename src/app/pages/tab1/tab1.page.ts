@@ -14,10 +14,32 @@ export class Tab1Page implements OnInit {
   constructor( private noticiasService: NoticiasService ) {}
 
   ngOnInit() {
+    this.cargarNoticias();
+  }
+
+  // Metodo para cargar noticias c/ infinitscroll //
+  loadData( event ) {
+    console.log( event );
+    this.cargarNoticias( event );
+  }
+
+  
+  cargarNoticias( event? ) {
+
+    // Obteniendo noticias //
     this.noticiasService.getNoticias()
       .subscribe( resp => {
-        console.log('Noticias', resp);
-        this.noticias.push( ...resp )      
+        console.log(resp);
+        
+        this.noticias.push( ...resp.results );
+
+        // Detiene infinit scroll cuando ya no hay elementos q mostrar //
+        if ( resp.next === null ) {
+          event.target.disabled = true;
+          event.target.complete();
+          return;
+        }
+
       });
   }
 

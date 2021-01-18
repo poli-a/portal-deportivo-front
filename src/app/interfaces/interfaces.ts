@@ -1,3 +1,10 @@
+export interface Noticias {
+    count: number;
+    next?: any;
+    previous: string;
+    results: Noticia[];
+}
+
 export interface Noticia {
     id: number;
     username: string;
@@ -19,4 +26,4 @@ export interface Categoria {
     created: string;
     updated: string;
     usuario: number;
-  }
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
-import { Noticia, Categoria } from '../interfaces/interfaces';
+import { Noticias, Categoria } from '../interfaces/interfaces';
 import { environment } from '../../environments/environment';
 
 const apiUrl = environment.apiUrl;
@@ -10,11 +10,16 @@ const apiUrl = environment.apiUrl;
 })
 export class NoticiasService {
 
+  // Variables p/ paginacion desde el back //
+  noticiasPage = 0;
+  noticiasXcatPage = 0;
+
   constructor( private http: HttpClient ) { }
 
   // Obtiene todas las noticias //
   getNoticias() {
-    return this.http.get<Noticia[]>(`${ apiUrl }/noticias`);
+    this.noticiasPage++;
+    return this.http.get<Noticias>(`${ apiUrl }/noticias/?page=${ this.noticiasPage }`);
   }
 
   // Obtiene todas las categorias //
@@ -24,6 +29,7 @@ export class NoticiasService {
 
   // Obtiene noticias por id de categoria //
   getNoticiasPorCategorias(categoria_id: number) {
-    return this.http.get<Noticia[]>(`${ apiUrl }/noticias/?categoria=${ categoria_id }`);
+    this.noticiasXcatPage++;
+    return this.http.get<Noticias>(`${ apiUrl }/noticias/?categoria=${ categoria_id }&page=${ this.noticiasXcatPage }`);
   }
 }
