@@ -15,6 +15,7 @@ export class Tab2Page implements OnInit{
 
   categorias: Categoria[] = [];
   noticias: Noticia[] = [];
+  page: number = 1;
 
   constructor( private noticiasService: NoticiasService ) {}
 
@@ -32,17 +33,33 @@ export class Tab2Page implements OnInit{
 
   }
 
-  noticiasPorCategorias(cat) {
+  noticiasPorCategorias(cat, event?) {
     this.noticias = [];
 
     // Obteniendo id de categoria seleccionada //
     const r = this.categorias.find(categoria => categoria.nombre === cat);
 
     // Obteniendo noticias de categoria seleccionada //
-    this.noticiasService.getNoticiasPorCategorias(r.id)
+    this.noticiasService.getNoticiasPorCategorias(r.id, this.page)
       .subscribe( resp => {
         this.noticias.push(...resp.results);
+
+        // Detiene infinit scroll cuando ya no hay elementos q mostrar //
+        if ( resp.next === null ) {
+          this.page = 1;
+          if ( event ) {
+            event.target.disabled = true;
+            event.target.complete();
+            return;
+          }          
+        } else {
+          this.page++;
+        }
       });
+  }
+
+  loadData(event) {
+    this.noticiasPorCategorias( this.segment.value, event );
   }
 
 }

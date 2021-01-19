@@ -19,7 +19,6 @@ export class Tab1Page implements OnInit {
 
   // Metodo para cargar noticias c/ infinitscroll //
   loadData( event ) {
-    console.log( event );
     this.cargarNoticias( event );
   }
 

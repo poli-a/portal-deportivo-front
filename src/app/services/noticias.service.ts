@@ -13,6 +13,7 @@ export class NoticiasService {
   // Variables p/ paginacion desde el back //
   noticiasPage = 0;
   noticiasXcatPage = 0;
+  categoriaSeleccionada = 0;
 
   constructor( private http: HttpClient ) { }
 
@@ -28,8 +29,8 @@ export class NoticiasService {
   }
 
   // Obtiene noticias por id de categoria //
-  getNoticiasPorCategorias(categoria_id: number) {
-    this.noticiasXcatPage++;
-    return this.http.get<Noticias>(`${ apiUrl }/noticias/?categoria=${ categoria_id }&page=${ this.noticiasXcatPage }`);
+  getNoticiasPorCategorias(categoria_id: number, page: number) {
+    
+    return this.http.get<Noticias>(`${ apiUrl }/noticias/?categoria=${ categoria_id }&page=${ page }`);
   }
 }
