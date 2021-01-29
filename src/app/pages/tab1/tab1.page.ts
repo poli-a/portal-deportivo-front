@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges} from '@angular/core';
 import { NoticiasService } from '../../services/noticias.service';
 import { Noticia } from '../../interfaces/interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -10,8 +11,8 @@ import { Noticia } from '../../interfaces/interfaces';
 export class Tab1Page implements OnInit {
 
   noticias: Noticia[] = [];
-
-  constructor( private noticiasService: NoticiasService ) {}
+  
+  constructor( private noticiasService: NoticiasService, private router: Router ) {}
 
   ngOnInit() {
     this.cargarNoticias();
@@ -25,7 +26,7 @@ export class Tab1Page implements OnInit {
   
   cargarNoticias( event? ) {
 
-    // Obteniendo noticias //
+    // Obteniendo noticias desde back//
     this.noticiasService.getNoticias()
       .subscribe( resp => {
         console.log(resp);
@@ -40,6 +41,11 @@ export class Tab1Page implements OnInit {
         }
 
       });
+  }
+
+  // Metodo p/ ver noticia seleccionada //
+  verNoticia(event) {
+    this.router.navigate(["/tabs/noticia", event.id]);
   }
 
 }

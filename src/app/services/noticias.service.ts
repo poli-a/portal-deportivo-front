@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
-import { Noticias, Categoria } from '../interfaces/interfaces';
+import { Noticias, Categoria, Noticia } from '../interfaces/interfaces';
 import { environment } from '../../environments/environment';
 
 const apiUrl = environment.apiUrl;
@@ -32,5 +32,10 @@ export class NoticiasService {
   getNoticiasPorCategorias(categoria_id: number, page: number) {
     
     return this.http.get<Noticias>(`${ apiUrl }/noticias/?categoria=${ categoria_id }&page=${ page }`);
+  }
+
+  // Obtiene noticia x id //
+  getNoticia(id: number) {
+    return this.http.get<Noticia>(`${ apiUrl }/noticias/${ id }`);
   }
 }

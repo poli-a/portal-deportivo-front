@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NoticiasService } from '../../services/noticias.service';
 import { Categoria, Noticia } from '../../interfaces/interfaces';
 import { IonSegment } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -17,7 +18,7 @@ export class Tab2Page implements OnInit{
   noticias: Noticia[] = [];
   page: number = 1;
 
-  constructor( private noticiasService: NoticiasService ) {}
+  constructor( private noticiasService: NoticiasService, private router: Router ) {}
 
   ngOnInit() {
 
@@ -60,6 +61,11 @@ export class Tab2Page implements OnInit{
 
   loadData(event) {
     this.noticiasPorCategorias( this.segment.value, event );
+  }
+
+  // Metodo p/ ver noticia seleccionada //
+  verNoticia(event) {
+    this.router.navigate(["/tabs/noticia", event.id]);
   }
 
 }

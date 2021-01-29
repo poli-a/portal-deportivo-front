@@ -1,7 +1,11 @@
 <ion-grid fixed>
   <ion-row>
+    
     <ion-col size="12" size-lg="3" size-md="4" size-sm="2" size-xs="12" *ngFor="let noticia of noticias">
-      <app-noticia [noticia]="noticia"></app-noticia>
+      
+      <app-noticia [noticia]="noticia" (click)="onClick(noticia)"></app-noticia>
+
     </ion-col>
+    
   </ion-row>  
 </ion-grid>
