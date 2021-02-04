@@ -6,5 +6,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" color="dark">
+
+  <app-action-sheet-more class="noticia-more" [noticia]="noticia"></app-action-sheet-more>
+
   <app-noticia [noticia]="noticia" *ngIf="noticia"></app-noticia>
+  
 </ion-content>

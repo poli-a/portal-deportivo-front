@@ -4,6 +4,7 @@ import { NoticiaComponent } from './noticia/noticia.component';
 import { NoticiasComponent } from './noticias/noticias.component';
 import { IonicModule } from '@ionic/angular';
 import { BackButtonComponent } from './back-button/back-button.component';
+import { ActionSheetMoreComponent } from './action-sheet-more/action-sheet-more.component';
 
 
 
@@ -11,12 +12,14 @@ import { BackButtonComponent } from './back-button/back-button.component';
   declarations: [
     NoticiaComponent,
     NoticiasComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    ActionSheetMoreComponent
   ],
   exports: [
     NoticiasComponent,
     NoticiaComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    ActionSheetMoreComponent
   ],
   imports: [
     CommonModule,

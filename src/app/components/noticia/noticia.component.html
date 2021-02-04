@@ -2,11 +2,7 @@
   <ion-card-header>
     <ion-card-subtitle>
       <span class="noticia-source-name">{{ noticia.nombreCategoria }}</span>
-      <div class="noticia-more" [hidden]="actionSheet">
-        <ion-button fill="clear" (click)="lanzarMenu()">
-          <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
-        </ion-button>
-      </div>
+      
     </ion-card-subtitle>
     <ion-card-title>{{ noticia.titulo }}</ion-card-title>
   </ion-card-header>
