@@ -7,5 +7,15 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" color="dark">
-  <app-noticias [noticias]="storageService.favoritos"></app-noticias>
+
+  <ion-slides *ngIf="storageService.favoritos.length === 0" [options]="sliderOpts">
+    <ion-slide>
+      <ion-label>No existen noticias guardadas en favoritos</ion-label>
+    </ion-slide>
+  </ion-slides>
+
+  <app-noticias [noticias]="storageService.favoritos"
+    *ngIf="storageService.favoritos.length > 0"
+    (noticiaSeleccionada)="verNoticia($event)"></app-noticias>
+
 </ion-content>

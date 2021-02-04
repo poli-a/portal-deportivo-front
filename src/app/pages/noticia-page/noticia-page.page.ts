@@ -12,6 +12,7 @@ import { NoticiasService } from '../../services/noticias.service';
 export class NoticiaPagePage implements OnInit {
   
   noticia: Noticia;
+  enFav: boolean;
 
   constructor(
     private noticiaService: NoticiasService,
@@ -23,10 +24,17 @@ export class NoticiaPagePage implements OnInit {
       if (params.has('id')) {
         this.noticiaService.getNoticia(Number(params.get('id')))
           .subscribe( resp => {
-            this.noticia = resp;    
+            this.noticia = resp;
           });
       }
     });
+
+    if (this.activeRoute.queryParams) {
+      this.activeRoute.queryParams.subscribe(params => {
+        this.enFav = params.enFav;
+      });
+    }
+    
   }  
 
 }

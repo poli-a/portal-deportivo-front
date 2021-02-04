@@ -14,6 +14,7 @@ import { StorageService } from '../../services/storage.service';
 export class ActionSheetMoreComponent implements OnInit {
 
   @Input() noticia: Noticia;
+  @Input() enFav;
 
   constructor(
     private actionSheetCtrl: ActionSheetController,
@@ -21,9 +22,33 @@ export class ActionSheetMoreComponent implements OnInit {
     private storageService: StorageService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {console.log(this.enFav);}
 
   async lanzarMenu() {
+
+    let btnFavDel;
+    if (this.enFav === 'true') {
+      // p/ borrar de fav //
+      btnFavDel = {
+        text: 'Eliminar de favoritos',
+        icon: 'trash',
+        cssClass: 'action-dark',
+        handler: () => {
+          console.log('Borrar Favorito');
+          this.storageService.borrarFavorito(this.noticia);
+        }
+      }
+    } else {
+      btnFavDel = {
+        text: 'A Favoritos',
+        icon: 'star',
+        cssClass: 'action-dark',
+        handler: () => {
+          console.log('Favorito');
+          this.storageService.guardarFavorito(this.noticia);
+        }
+      }
+    }
     const actionSheet = await this.actionSheetCtrl.create({
       buttons: [{
         text: 'Compartir',
@@ -37,15 +62,9 @@ export class ActionSheetMoreComponent implements OnInit {
             ''
           );
         }
-      }, {
-        text: 'A Favoritos',
-        icon: 'star',
-        cssClass: 'action-dark',
-        handler: () => {
-          console.log('Favorito');
-          this.storageService.guardarFavorito(this.noticia);
-        }
-      }, {
+      },
+      btnFavDel,
+      {
         cssClass: 'action-dark',
         text: 'Cancelar',
         icon: 'close',

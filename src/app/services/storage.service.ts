@@ -34,4 +34,9 @@ export class StorageService {
       this.favoritos = fav;
     }
   }
+
+  borrarFavorito(noticia: Noticia) {
+    this.favoritos = this.favoritos.filter( n => n.id !== noticia.id);
+    this.storage.set('Favoritos', this.favoritos);
+  }
 }
