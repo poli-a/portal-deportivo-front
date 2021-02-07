@@ -5,6 +5,7 @@ import { Noticia } from '../../interfaces/interfaces';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 // Service de localstorage//
 import { StorageService } from '../../services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-action-sheet-more',
@@ -19,10 +20,11 @@ export class ActionSheetMoreComponent implements OnInit {
   constructor(
     private actionSheetCtrl: ActionSheetController,
     private socialSharing: SocialSharing,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private router: Router
   ) { }
 
-  ngOnInit() {console.log(this.enFav);}
+  ngOnInit() { }
 
   async lanzarMenu() {
 
@@ -36,6 +38,7 @@ export class ActionSheetMoreComponent implements OnInit {
         handler: () => {
           console.log('Borrar Favorito');
           this.storageService.borrarFavorito(this.noticia);
+          this.router.navigateByUrl('/tabs/tab3');
         }
       }
     } else {

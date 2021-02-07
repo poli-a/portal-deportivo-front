@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Noticia } from '../interfaces/interfaces';
+// Service p/ mostrar toast //
+import { ToastController } from '@ionic/angular';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +12,18 @@ export class StorageService {
 
   favoritos : Noticia[] = [];
 
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage, public toastController: ToastController) {
     // Obteniendo favoritos //
     this.cargarFavoritos();
+  }
+
+  async presentToast( message: string) {
+    const toast = await this.toastController.create({
+      message,
+      position: "top",
+      duration: 1500,
+    });
+    toast.present();
   }
 
   guardarFavorito(noticia: Noticia) {
@@ -25,6 +37,8 @@ export class StorageService {
       // Guardando en storage  //
       this.storage.set('Favoritos', this.favoritos);
     }
+
+    this.presentToast('Agregado a favoritos');
   }
 
   async cargarFavoritos() {
@@ -38,5 +52,6 @@ export class StorageService {
   borrarFavorito(noticia: Noticia) {
     this.favoritos = this.favoritos.filter( n => n.id !== noticia.id);
     this.storage.set('Favoritos', this.favoritos);
+    this.presentToast('Eliminado de favoritos');
   }
 }
