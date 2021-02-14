@@ -13,6 +13,8 @@ export class NoticiaPagePage implements OnInit {
   
   noticia: Noticia;
   enFav: boolean;
+  // url p/ back button //
+  url: string;
 
   constructor(
     private noticiaService: NoticiasService,
@@ -31,7 +33,12 @@ export class NoticiaPagePage implements OnInit {
 
     if (this.activeRoute.queryParams) {
       this.activeRoute.queryParams.subscribe(params => {
-        this.enFav = params.enFav;
+        if (params.url == 'tab3') {
+          this.enFav = true;
+        } else {
+          this.enFav = false;
+        }
+        this.url = '/tabs/' + params.url
       });
     }
     

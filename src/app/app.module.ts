@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http'
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 // Service p/ guardar noticias en local storage //
 import { IonicStorageModule } from '@ionic/storage';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { IonicStorageModule } from '@ionic/storage';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,

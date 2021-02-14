@@ -17,6 +17,6 @@ export class Tab3Page {
   constructor(public storageService: StorageService, private router: Router) { }
 
   verNoticia(event) {
-    this.router.navigate(["/tabs/noticia", event.id], { queryParams: { enFav: true }});
+    this.router.navigate(["/tabs/noticia", event.id], { queryParams: { url: 'tab3' }});
   }
 }

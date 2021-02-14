@@ -28,8 +28,8 @@ export class Tab2Page implements OnInit{
         this.categorias.push( ...resp );
 
         // Estableciendo categoria p/ mostrar //
-        this.segment.value = 'Futbol';
-        this.noticiasPorCategorias('Futbol');
+        this.segment.value = 'FUTBOL';
+        this.noticiasPorCategorias('FUTBOL');
       });
 
   }
@@ -65,7 +65,7 @@ export class Tab2Page implements OnInit{
 
   // Metodo p/ ver noticia seleccionada //
   verNoticia(event) {
-    this.router.navigate(["/tabs/noticia", event.id]);
+    this.router.navigate(["/tabs/noticia", event.id], { queryParams: { url: 'tab2' }});
   }
 
 }

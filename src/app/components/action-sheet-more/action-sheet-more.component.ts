@@ -29,7 +29,7 @@ export class ActionSheetMoreComponent implements OnInit {
   async lanzarMenu() {
 
     let btnFavDel;
-    if (this.enFav === 'true') {
+    if (this.enFav === true) {
       // p/ borrar de fav //
       btnFavDel = {
         text: 'Eliminar de favoritos',

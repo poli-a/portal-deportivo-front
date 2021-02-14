@@ -45,7 +45,7 @@ export class Tab1Page implements OnInit {
 
   // Metodo p/ ver noticia seleccionada //
   verNoticia(event) {
-    this.router.navigate(["/tabs/noticia", event.id]);
+    this.router.navigate(["/tabs/noticia", event.id], { queryParams: { url: 'tab1' }});
   }
 
 }
