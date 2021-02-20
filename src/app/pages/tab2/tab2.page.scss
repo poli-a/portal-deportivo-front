@@ -1,22 +1,3 @@
-ion-segment::-webkit-scrollbar {
-    -webkit-appearance: none;
-}
-
-ion-segment::-webkit-scrollbar:vertical {
-    width:10px;
-}
-
-ion-segment::-webkit-scrollbar:horizontal {
-    height: 10px;
-}
-
-ion-segment::-webkit-scrollbar-thumb {
-    background-color: #797979;
-}
-
-ion-segment::-webkit-scrollbar-track {
-    border-radius: 10px;  
-}
 
 ion-segment-button {
     background-color: var( --ion-color-dark ) !important;
@@ -25,4 +6,8 @@ ion-segment-button {
 
 .segment-button-checked {
     color: var( --ion-color-primary ) !important;
+}
+
+ion-title {
+    text-align: center;
 }

@@ -18,9 +18,9 @@ export class NoticiasService {
   constructor( private http: HttpClient ) { }
 
   // Obtiene todas las noticias //
-  getNoticias() {
+  getNoticias(page) {
     this.noticiasPage++;
-    return this.http.get<Noticias>(`${ apiUrl }/noticias/?page=${ this.noticiasPage }`);
+    return this.http.get<Noticias>(`${ apiUrl }/noticias/?page=${ page }`);
   }
 
   // Obtiene todas las categorias //

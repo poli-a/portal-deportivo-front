@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NoticiasService } from '../../services/noticias.service';
 import { Categoria, Noticia } from '../../interfaces/interfaces';
 import { IonSegment } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -14,58 +14,58 @@ export class Tab2Page implements OnInit{
 
   @ViewChild( IonSegment ) segment: IonSegment;
 
-  categorias: Categoria[] = [];
   noticias: Noticia[] = [];
   page: number = 1;
+  url: string = '/tabs/tab1'
+  idCat: string = '';
 
-  constructor( private noticiasService: NoticiasService, private router: Router ) {}
+  constructor( private noticiasService: NoticiasService, private router: Router, private activeRoute: ActivatedRoute ) {}
 
   ngOnInit() {
-
-    // Obteniendo categorias del back //
-    this.noticiasService.getCategorias()
-      .subscribe( resp => {
-        this.categorias.push( ...resp );
-
-        // Estableciendo categoria p/ mostrar //
-        this.segment.value = 'FUTBOL';
-        this.noticiasPorCategorias('FUTBOL');
-      });
-
+      this.noticiasPorCategorias();
   }
 
-  noticiasPorCategorias(cat, event?) {
+  noticiasPorCategorias(event?) {
     this.noticias = [];
 
-    // Obteniendo id de categoria seleccionada //
-    const r = this.categorias.find(categoria => categoria.nombre === cat);
+      this.activeRoute.paramMap.subscribe(params => {
+        if (params.has('id')) {
+          this.noticiasService.getNoticiasPorCategorias(Number(params.get('id')), this.page)
+            .subscribe( resp => {
+              this.noticias.push(...resp.results);
+              this.idCat = params.get('id');
 
-    // Obteniendo noticias de categoria seleccionada //
-    this.noticiasService.getNoticiasPorCategorias(r.id, this.page)
-      .subscribe( resp => {
-        this.noticias.push(...resp.results);
-
-        // Detiene infinit scroll cuando ya no hay elementos q mostrar //
-        if ( resp.next === null ) {
-          this.page = 1;
-          if ( event ) {
-            event.target.disabled = true;
-            event.target.complete();
-            return;
-          }          
-        } else {
-          this.page++;
+              // Detiene infinit scroll cuando ya no hay elementos q mostrar //
+              if ( resp.next === null ) {
+                this.page = 1;
+                if ( event ) {
+                  event.target.disabled = true;
+                  event.target.complete();
+                  return;
+                }          
+              } else {
+                this.page++;
+              }
+            });
         }
-      });
+      });    
   }
 
   loadData(event) {
-    this.noticiasPorCategorias( this.segment.value, event );
+    if (this.page > 1) {
+      this.noticiasPorCategorias( event );
+    } else {
+      if ( event ) {
+        event.target.disabled = true;
+        event.target.complete();
+        return;
+      } 
+    }
   }
 
   // Metodo p/ ver noticia seleccionada //
   verNoticia(event) {
-    this.router.navigate(["/tabs/noticia", event.id], { queryParams: { url: 'tab2' }});
+    this.router.navigate(["/tabs/noticia", event.id], { queryParams: { url: 'tab2' + '/' + this.idCat }});
   }
 
 }

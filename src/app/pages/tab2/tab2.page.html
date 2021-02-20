@@ -1,14 +1,21 @@
 <ion-header [translucent]="true" no-border>
+
   <ion-toolbar color="dark">
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="{{ url }}" text="Regresar" color="primary" mode="ios"></ion-back-button>
+    </ion-buttons>
+
     <ion-title>
       FutbolRG - Categorias
     </ion-title>
+
+    <ion-title id="cat" *ngIf="noticias.length > 0">
+      {{ noticias[0].nombreCategoria }}
+    </ion-title>
+
   </ion-toolbar>
-  <ion-segment scrollable mode="md" color="primary" (ionChange)="noticiasPorCategorias( $event.detail.value )">
-    <ion-segment-button mode="md" *ngFor="let categoria of categorias" [value]="categoria.nombre">
-      <ion-label text-capitalize>{{ categoria.nombre }}</ion-label>
-    </ion-segment-button>    
-  </ion-segment>
+
 </ion-header>
 
 <ion-content [fullscreen]="true" color="dark">
