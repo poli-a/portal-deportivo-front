@@ -31,7 +31,9 @@
 
 <ion-content [fullscreen]="true" color="dark">
 
-  <app-noticias [noticias]="noticias" (noticiaSeleccionada)="verNoticia($event)"></app-noticias>
+  <div id="not">
+    <app-noticias [noticias]="noticias" (noticiaSeleccionada)="verNoticia($event)"></app-noticias>    
+  </div>
   
   <ion-infinite-scroll treshold="200px" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando noticias...">
