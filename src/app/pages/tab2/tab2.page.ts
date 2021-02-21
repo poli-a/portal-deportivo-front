@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NoticiasService } from '../../services/noticias.service';
-import { Categoria, Noticia } from '../../interfaces/interfaces';
+import { Noticia } from '../../interfaces/interfaces';
 import { IonSegment } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -37,7 +37,6 @@ export class Tab2Page implements OnInit{
 
               // Detiene infinit scroll cuando ya no hay elementos q mostrar //
               if ( resp.next === null ) {
-                this.page = 1;
                 if ( event ) {
                   event.target.disabled = true;
                   event.target.complete();
@@ -45,6 +44,9 @@ export class Tab2Page implements OnInit{
                 }          
               } else {
                 this.page++;
+                if ( event ) {
+                  event.target.complete();
+                } 
               }
             });
         }
@@ -55,11 +57,9 @@ export class Tab2Page implements OnInit{
     if (this.page > 1) {
       this.noticiasPorCategorias( event );
     } else {
-      if ( event ) {
-        event.target.disabled = true;
-        event.target.complete();
-        return;
-      } 
+      event.target.disabled = true;
+      event.target.complete();
+      return;
     }
   }
 
