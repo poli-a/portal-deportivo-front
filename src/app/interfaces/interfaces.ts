@@ -11,12 +11,14 @@ export interface Noticia {
     nombreCategoria: string;
     titulo: string;
     slug: string;
+    descripcion: string;
     nota: string;
     media_url: string;
     fecha_publicacion: string;
     status: string;
     usuario: number;
     categoria: number;
+    img: string;
 }
 
 export interface Categoria {

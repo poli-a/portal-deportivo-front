@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import { Noticias, Categoria, Noticia } from '../interfaces/interfaces';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.prod';
 
 const apiUrl = environment.apiUrl;
 
