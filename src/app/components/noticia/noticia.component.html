@@ -6,7 +6,7 @@
     </ion-card-subtitle>
     <ion-card-title>{{ noticia.titulo }}</ion-card-title>
   </ion-card-header>
-  <ion-img *ngIf="noticia.media_url" class="animated fadeIn fast" [src]="noticia.img"></ion-img>
+  <ion-img *ngIf="noticia.media_url" class="animated fadeIn fast" [src]="noticia.media_url"></ion-img>
   <ion-card-content>
     <p>
       {{ noticia.descripcion }}
