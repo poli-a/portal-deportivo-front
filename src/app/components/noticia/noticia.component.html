@@ -6,7 +6,14 @@
     </ion-card-subtitle>
     <ion-card-title>{{ noticia.titulo }}</ion-card-title>
   </ion-card-header>
-  <ion-img *ngIf="noticia.media_url" class="animated fadeIn fast" [src]="noticia.media_url"></ion-img>
+  <ion-slides pager="true">
+    <ion-slide *ngIf="noticia.media_url" class="image-slide" [style]=" noticia.media_url | domSanitizer">
+      <!--<ion-img *ngIf="noticia.media_url" class="animated fadeIn fast" [src]="noticia.media_url"></ion-img>-->
+    </ion-slide>
+    <ion-slide class="image-slide" [style]=" 'https://img.europapress.es/fotoweb/fotonoticia_20210430232740_1024.jpg' | domSanitizer ">
+      <!--<ion-img class="animated fadeIn fast" src="http://futbolrg.com.ar/fotos/PARTIDOS/20210215a/18.JPG"></ion-img>-->
+    </ion-slide>
+  </ion-slides>
   <ion-card-content>
     <p>
       {{ noticia.descripcion }}

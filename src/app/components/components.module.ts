@@ -4,6 +4,7 @@ import { NoticiaComponent } from './noticia/noticia.component';
 import { NoticiasComponent } from './noticias/noticias.component';
 import { IonicModule } from '@ionic/angular';
 import { ActionSheetMoreComponent } from './action-sheet-more/action-sheet-more.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -21,6 +22,7 @@ import { ActionSheetMoreComponent } from './action-sheet-more/action-sheet-more.
   imports: [
     CommonModule,
     IonicModule,
+    PipesModule
   ]
 })
 export class ComponentsModule { }
